@@ -95,7 +95,9 @@ class CreateNeocastPlugin extends Generator {
     ]
 
     devDependencies.push(
-      'json-loader'
+      'json-loader',
+      'babel-loader',
+      'babel-core'
     )
 
     const dependencies = []

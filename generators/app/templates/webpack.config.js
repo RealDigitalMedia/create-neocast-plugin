@@ -11,12 +11,6 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader']
       }
-    ],
-    loaders: [
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      }
     ]
   },
   devtool: 'source-map',
