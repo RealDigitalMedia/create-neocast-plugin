@@ -1,6 +1,9 @@
 # dependencies
 node_modules
 
+# Build output
+dist
+
 # misc
 .DS_Store
 npm-debug.log
