@@ -56,20 +56,27 @@ class CreateNeocastPlugin extends Generator {
     return {
       packageJSON() {
         const pkg = {
-          name: 'Title',
+          name: _.kebabCase(this.appname),
           version: '1.0.0',
           description: 'This is your NEOCAST Media Player Plugin.',
           main: 'index.js',
           scripts: {
             run: 'node src/index.js',
-            build:
-              'esbuild src/index.js --bundle --minify --platform=node --analyze --target=node8 --outfile=dist/index.js',
+            build: './esbuild.js',
           },
           dependencies: {},
+          devDependencies: {
+            esbuild: '^0.17.4',
+          },
           author: '',
           license: 'UNLICENSED',
         }
+
         this.fs.writeJSON(this.destinationPath('package.json'), pkg)
+      },
+
+      esBuild() {
+        this.fs.copyTpl(this.templatePath('esbuild.js'), this.destinationPath('esbuild.js'), this.props)
       },
 
       gitIgnore() {
