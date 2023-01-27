@@ -67,6 +67,22 @@ const dynamicPrebuiltLoader = {
             const originalLoader = Module._load
 
             Module._load = function(request, parent) {
+              // If this is mapbox pre gyp then return
+              // an object with a find function that returns
+              // a path. Some libraries will do a file existence
+              // on this path so we return /dev/null as our
+              // sentinel so it will pass that test. When
+              // *THAT* is required, we'll just find our
+              // loadable prebuild file and return that.
+              const MAPBOX_REQUIRE_SENTINEL = '/dev/null'
+              if (request === '@mapbox/node-pre-gyp') {
+                return { find: () => MAPBOX_REQUIRE_SENTINEL}
+              }
+
+              if (request === MAPBOX_REQUIRE_SENTINEL) {
+                return loadPrebuild()
+              }
+
               return (request === 'node-gyp-build') ? loadPrebuild : originalLoader.apply(this, arguments)
             }
 
@@ -93,7 +109,7 @@ async function build() {
       platform: 'node',
       outfile: 'dist/index.js',
       loader: { '.node': 'binary' },
-      external: ['node-gyp-build'],
+      external: ['node-gyp-build', '@mapbox/node-pre-gyp'],
       target: ['node8'],
       plugins: [dynamicPrebuiltLoader],
       metafile: true,
