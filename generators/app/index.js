@@ -62,7 +62,7 @@ class CreateNeocastPlugin extends Generator {
           main: 'index.js',
           scripts: {
             run: 'node src/index.js',
-            build: './esbuild.js',
+            build: './esbuild.cjs',
           },
           dependencies: {},
           devDependencies: {
@@ -76,7 +76,7 @@ class CreateNeocastPlugin extends Generator {
       },
 
       esBuild() {
-        this.fs.copyTpl(this.templatePath('esbuild.js'), this.destinationPath('esbuild.js'), this.props)
+        this.fs.copyTpl(this.templatePath('esbuild.cjs'), this.destinationPath('esbuild.cjs'), this.props)
       },
 
       gitIgnore() {
