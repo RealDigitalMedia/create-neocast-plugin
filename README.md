@@ -1,15 +1,28 @@
 # Create NEOCAST Media Player plugin
 
-## Usage
+## Installation
 
 ```bash
-yarn create create-neocast-plugin PLUGIN_NAME [<flags>]
+npm install -g RealDigitalMedia/create-neocat-plugin
 ```
 
-To generate your new project:
+## Usage
+
+Since `create-neocast-plugin` generates a project directory automatically you should `cd` to the parent directory where you keep your plugins.
 
 ```bash
-yarn create create-neocast-plugin cool-project-name
+cd /path/to/parent/directory
+```
+
+Then run `create-neocast-plugin` to create your plugin.
+
+```bash
+create-neocast-plugin PLUGIN_NAME
+```
+
+Finally, `cd` to the directory the `create-neocast-plugin` tool created.
+
+```bash
 cd cool-project-name
 ```
 
